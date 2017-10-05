@@ -6,6 +6,10 @@ const express = require('express'),
 
 dotenv.load();
 
+// Server
+const APP_SERVER_PORT = process.env.APP_SERVER_PORT || 4390;
+
+// Slack app
 slackEvents.APP_VERIFICATION_TOKEN = process.env.APP_VERIFICATION_TOKEN;
 slackWeb.APP_TOKEN = process.env.APP_TOKEN;
 
@@ -24,7 +28,7 @@ app.post('/', function (req, res, next) {
             for (let link of event.links) {
                 unfurls[link.url] = {
                     title: 'Title',
-                    text: 'Message body',
+                    text: 'Message body.',
                     color: '#E83531',
                     fields: [
                         {
@@ -58,7 +62,7 @@ app.post('/', function (req, res, next) {
     }
 });
 
-const server = app.listen(4390, function () {
+const server = app.listen(APP_SERVER_PORT, function () {
     const {address, port} = server.address();
     console.log(`Running on http://${address}:${port}`);
 });
